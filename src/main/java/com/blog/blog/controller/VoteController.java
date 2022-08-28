@@ -1,5 +1,6 @@
 package com.blog.blog.controller;
 
+import com.blog.blog.Model.ResponseModel;
 import com.blog.blog.dto.VoteDto;
 import com.blog.blog.service.VoteService;
 import lombok.AllArgsConstructor;
@@ -18,9 +19,9 @@ public class VoteController {
     private final VoteService voteService;
 
     @PostMapping
-    public ResponseEntity<Void> createVote(@RequestBody VoteDto voteDto)
+    public ResponseEntity<?> createVote(@RequestBody VoteDto voteDto)
     {
       voteService.saveVote(voteDto);
-      return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(new ResponseModel("VOTE have been Updated Successfully"), HttpStatus.CREATED);
     }
 }
