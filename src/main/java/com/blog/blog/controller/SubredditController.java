@@ -1,9 +1,6 @@
 package com.blog.blog.controller;
-
-import com.blog.blog.Model.Post;
 import com.blog.blog.Model.ResponseModel;
 import com.blog.blog.Model.Subreddit;
-import com.blog.blog.dto.PostRequest;
 import com.blog.blog.dto.SubredditDto;
 import com.blog.blog.repository.SubredditRepository;
 import com.blog.blog.service.SubredditService;
