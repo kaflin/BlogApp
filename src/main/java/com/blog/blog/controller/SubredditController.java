@@ -64,4 +64,9 @@ public class SubredditController {
                 .status(HttpStatus.OK)
                 .body(subredditService.getSubredditById(id));
     }
+    @DeleteMapping("/deleteSubReddit/{id}")
+    public ResponseEntity deleteSubReddit(@PathVariable Long id) {
+        subredditService.deleteBySubRedditId(id);
+        return new ResponseEntity(new ResponseModel("SubReddit have been deleted Successfully !!"), HttpStatus.OK );
+    }
 }

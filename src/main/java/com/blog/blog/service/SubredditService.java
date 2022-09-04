@@ -6,10 +6,13 @@ import com.blog.blog.Model.User;
 import com.blog.blog.dto.PostRequest;
 import com.blog.blog.dto.SubredditDto;
 import com.blog.blog.exceptions.SpringRedditException;
+import com.blog.blog.exceptions.SubredditNotFoundException;
 import com.blog.blog.mapper.SubredditMapper;
 import com.blog.blog.repository.SubredditRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -60,6 +63,16 @@ public class SubredditService {
         Subreddit subreddit = subredditRepository.findById(id)
                 .orElseThrow(() -> new SpringRedditException("No SubReddit found with Id-" + id));
         return subredditMapper.mapSubredditToDto(subreddit);
+    }
+    @Transactional
+    public Object deleteBySubRedditId(Long id) {
+        Subreddit subreddit = subredditRepository.findById(id)
+                .orElseThrow(() -> new SubredditNotFoundException(id.toString()));
+        if(subreddit.getId()!=null) {
+            return subredditRepository.deleteSubredditById(subreddit.getId());
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
 

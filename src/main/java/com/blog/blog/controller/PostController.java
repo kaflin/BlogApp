@@ -3,12 +3,10 @@ package com.blog.blog.controller;
 
 import com.blog.blog.Model.Post;
 import com.blog.blog.Model.ResponseModel;
-import com.blog.blog.Model.Subreddit;
 import com.blog.blog.dto.PostRequest;
 import com.blog.blog.dto.PostResponse;
 import com.blog.blog.repository.PostRepository;
 import com.blog.blog.service.PostService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,6 +80,12 @@ public class PostController {
     @GetMapping("by-user/{name}")
     public ResponseEntity<List<PostResponse>> getPostsByUsername(@PathVariable String name) {
         return  ResponseEntity.status(HttpStatus.OK).body(postService.getPostsByUsername(name));
+    }
+
+    @DeleteMapping("/deletePost/{id}")
+    public ResponseEntity deletePost(@PathVariable Long id) {
+        postService.deleteByPostId(id);
+        return new ResponseEntity(new ResponseModel("Post have been deleted Successfully !!"), HttpStatus.OK );
     }
 
 }

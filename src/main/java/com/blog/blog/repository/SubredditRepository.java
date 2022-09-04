@@ -12,4 +12,5 @@ public interface SubredditRepository extends JpaRepository<Subreddit,Long> {
 
     Optional<Subreddit> findByName(String subredditName);
 
+    Optional<Subreddit> deleteSubredditById(Long id);
 }

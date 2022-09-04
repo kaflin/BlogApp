@@ -13,9 +13,10 @@ import com.blog.blog.mapper.PostMapper;
 import com.blog.blog.repository.PostRepository;
 import com.blog.blog.repository.SubredditRepository;
 import com.blog.blog.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -91,12 +92,15 @@ public class PostService {
 
     }
 
-//    @Transactional(readOnly = true)
-    public List<PostResponse> getPostsBySubreddit(Long subredditId) {
-        Subreddit subreddit = subredditRepository.findById(subredditId)
-                .orElseThrow(() -> new SubredditNotFoundException(subredditId.toString()));
-        List<Post> posts = postRepository.findAllBySubreddit(subreddit);
-        return posts.stream().map(postMapper::mapToDto).collect(Collectors.toList());
+    @Transactional
+    public Object deleteByPostId(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException(id.toString()));
+        if(post.getPostId()!=null) {
+            return postRepository.deleteByPostId(post.getPostId());
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
