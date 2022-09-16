@@ -48,8 +48,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         });
         return authorities;
     }
-//    private Collection<? extends GrantedAuthority> getAuthorities(String role)
-//    {
-//        return Collections.singletonList( new SimpleGrantedAuthority(role));
-//    }
 }
