@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class SubredditController {
     private final SubredditService subredditService;
     private final SubredditRepository subredditRepository;
 
-    @PostMapping
+
+    @PostMapping("/save")
     public ResponseEntity<?> createSubreddit(@RequestBody SubredditDto subredditDto) {
         if (!subredditDto.getName().isEmpty() && !subredditDto.getDescription().isEmpty()) {
             Optional<Subreddit> name = subredditRepository.findByName(subredditDto.getName());

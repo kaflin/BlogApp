@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -33,5 +34,14 @@ public class User {
     private String email;
     private Instant created;
     private boolean enabled;
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID")
+            }
+    )
+    private Set<Role> role;
 }

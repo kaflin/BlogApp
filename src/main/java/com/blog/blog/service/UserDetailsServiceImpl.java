@@ -1,5 +1,6 @@
 package com.blog.blog.service;
 
+import com.blog.blog.Model.Role;
 import com.blog.blog.Model.User;
 import com.blog.blog.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -11,9 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -38,11 +37,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getPassword(),user.isEnabled(),
                 true,true,
                 true,
-        getAuthorities("USER"));
+        getAuthorities(userOptional));
 
     }
-    private Collection<? extends GrantedAuthority> getAuthorities(String role)
-    {
-        return Collections.singletonList( new SimpleGrantedAuthority(role));
+
+    private Set getAuthorities(Optional<User> user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        user.get().getRole().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+        });
+        return authorities;
     }
+//    private Collection<? extends GrantedAuthority> getAuthorities(String role)
+//    {
+//        return Collections.singletonList( new SimpleGrantedAuthority(role));
+//    }
 }

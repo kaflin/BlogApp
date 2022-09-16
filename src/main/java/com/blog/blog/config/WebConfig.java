@@ -10,15 +10,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    private static final String GET = "GET";
+    private static final String POST = "POST";
+    private static final String PUT = "PUT";
+    private static final String DELETE = "DELETE";
+
     @Override
     public void addCorsMappings(CorsRegistry corsregistry) {
       corsregistry.addMapping("/**")
-              .allowedOrigins("*")
-              .allowedMethods("*")
+              .allowedMethods(GET, POST, PUT, DELETE)
               .maxAge(3600L)
               .allowedHeaders("*")
-              .exposedHeaders("Authorization")
-              .allowCredentials(false);
+              .allowedOriginPatterns("*")
+              .allowCredentials(true);
     }
 //    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry)

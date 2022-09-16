@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.net.URISyntaxException;
 
@@ -28,6 +29,11 @@ public class AuthController {
         this.authService = authService;
         this.userRepository = userRepository;
         this.refreshTokenService = refreshTokenService;
+    }
+
+    @PostConstruct
+    public void initRoleAndUser() {
+        authService.initRoleAndUser();
     }
 
     @PostMapping("/signup")

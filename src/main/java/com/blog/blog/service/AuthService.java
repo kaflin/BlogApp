@@ -1,5 +1,6 @@
 package com.blog.blog.service;
 import com.blog.blog.Model.NotificationEmail;
+import com.blog.blog.Model.Role;
 import com.blog.blog.Model.User;
 import com.blog.blog.Model.VerificationToken;
 import com.blog.blog.config.AppConfig;
@@ -8,6 +9,7 @@ import com.blog.blog.dto.LoginRequest;
 import com.blog.blog.dto.RefreshTokenRequest;
 import com.blog.blog.dto.RegisterRequest;
 import com.blog.blog.exceptions.SpringRedditException;
+import com.blog.blog.repository.RoleRepository;
 import com.blog.blog.repository.UserRepository;
 import com.blog.blog.repository.VerificationTokenRepository;
 import com.blog.blog.security.JwtProvider;
@@ -17,16 +19,17 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -36,6 +39,7 @@ public class AuthService {
     private Long tokenExpirationInMillis;
 
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final MailService mailService;
     private final VerificationTokenRepository verificationTokenRepository;
@@ -44,7 +48,7 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
     private final AppConfig appConfig;
 
-    public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository, MailService mailService, VerificationTokenRepository verificationTokenRepository, AuthenticationManager authenticationManager, JwtProvider jwtProvider, RefreshTokenService refreshTokenService, AppConfig appConfig) {
+    public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository, MailService mailService, VerificationTokenRepository verificationTokenRepository, AuthenticationManager authenticationManager, JwtProvider jwtProvider, RefreshTokenService refreshTokenService, AppConfig appConfig,RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.mailService = mailService;
@@ -53,11 +57,40 @@ public class AuthService {
         this.jwtProvider = jwtProvider;
         this.refreshTokenService = refreshTokenService;
         this.appConfig = appConfig;
+        this.roleRepository =roleRepository;
+    }
+    public void initRoleAndUser() {
+
+        Role adminRole = new Role();
+        adminRole.setRoleName("ADMIN");
+        adminRole.setRoleDescription("Admin role");
+        roleRepository.save(adminRole);
+
+        Role userRole = new Role();
+        userRole.setRoleName("USER");
+        userRole.setRoleDescription("Default role for newly created record");
+        roleRepository.save(userRole);
+
+        User adminUser = new User();
+        adminUser.setId((long) 1);
+        adminUser.setUsername("admin123");
+        adminUser.setPassword(passwordEncoder.encode("admin@pass"));
+        adminUser.setEmail("srjrocks60@gmail.com");
+        adminUser.setEnabled(true);
+        adminUser.setCreated(Instant.now());
+        Set<Role> adminRoles = new HashSet<>();
+        adminRoles.add(adminRole);
+        adminUser.setRole(adminRoles);
+        userRepository.save(adminUser);
     }
 
 
     public void signup(RegisterRequest registerRequest) {
         User user=new User();
+        Role role=roleRepository.findById("USER").get();
+        Set<Role> userRoles=new HashSet<>();
+        userRoles.add(role);
+        user.setRole(userRoles);
 
         if(registerRequest.getUsername() !=null) {
             user.setUsername((registerRequest.getUsername()));
