@@ -53,7 +53,7 @@ public class SubredditController {
         return new ResponseEntity<>(new ResponseModel("Subreddit have been Updated Successfully"), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<SubredditDto>> getAllSubreddits() {
         return ResponseEntity
                 .status(HttpStatus.OK)

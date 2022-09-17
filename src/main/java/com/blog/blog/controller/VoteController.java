@@ -18,7 +18,7 @@ public class VoteController {
 
     private final VoteService voteService;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<?> createVote(@RequestBody VoteDto voteDto)
     {
       voteService.saveVote(voteDto);

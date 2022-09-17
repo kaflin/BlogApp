@@ -28,7 +28,7 @@ public class PostController {
         this.postRepository=postRepository;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<?> createPosts(@RequestBody PostRequest postRequest) {
         Optional<Post> postName = postRepository.findByPostName(postRequest.getPostName());
         if (!postName.isPresent()) {
@@ -66,7 +66,7 @@ public class PostController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<PostResponse>> getAllPost()
     {
         return ResponseEntity.status(HttpStatus.OK).body(postService.getAllPost());
