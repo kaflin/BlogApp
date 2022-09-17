@@ -1,5 +1,4 @@
 package com.blog.blog.service;
-
 import com.blog.blog.Model.Post;
 import com.blog.blog.Model.Vote;
 import com.blog.blog.dto.VoteDto;
@@ -7,8 +6,6 @@ import com.blog.blog.exceptions.PostNotFoundException;
 import com.blog.blog.exceptions.SpringRedditException;
 import com.blog.blog.repository.PostRepository;
 import com.blog.blog.repository.VoteRepository;
-
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;

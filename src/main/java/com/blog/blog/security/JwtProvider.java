@@ -1,5 +1,4 @@
 package com.blog.blog.security;
-
 import com.blog.blog.exceptions.SpringRedditException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -7,8 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
-
-
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +13,6 @@ import java.security.*;
 import java.security.cert.CertificateException;
 import java.time.Instant;
 import java.util.Date;
-
-import static io.jsonwebtoken.Jwts.claims;
 import static io.jsonwebtoken.Jwts.parser;
 
 @Service

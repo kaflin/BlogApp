@@ -1,10 +1,7 @@
 package com.blog.blog.service;
-
-import com.blog.blog.Model.Role;
 import com.blog.blog.Model.User;
 import com.blog.blog.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

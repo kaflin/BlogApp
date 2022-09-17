@@ -1,7 +1,5 @@
 package com.blog.blog.repository;
-
 import com.blog.blog.Model.Subreddit;
-import com.blog.blog.dto.SubredditDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

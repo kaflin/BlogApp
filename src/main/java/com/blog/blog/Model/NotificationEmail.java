@@ -1,6 +1,4 @@
 package com.blog.blog.Model;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

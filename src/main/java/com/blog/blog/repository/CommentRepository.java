@@ -1,5 +1,4 @@
 package com.blog.blog.repository;
-
 import com.blog.blog.Model.Comment;
 import com.blog.blog.Model.Post;
 import com.blog.blog.Model.User;

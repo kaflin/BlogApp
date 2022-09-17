@@ -1,8 +1,6 @@
 package com.blog.blog.service;
-
 import com.blog.blog.Model.*;
 import com.blog.blog.dto.CommentsDto;
-import com.blog.blog.dto.SubredditDto;
 import com.blog.blog.exceptions.PostNotFoundException;
 import com.blog.blog.exceptions.SpringRedditException;
 import com.blog.blog.exceptions.UsernameNotFoundException;
@@ -10,10 +8,8 @@ import com.blog.blog.mapper.CommentMapper;
 import com.blog.blog.repository.CommentRepository;
 import com.blog.blog.repository.PostRepository;
 import com.blog.blog.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;

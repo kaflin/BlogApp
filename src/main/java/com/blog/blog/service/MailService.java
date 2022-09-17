@@ -1,8 +1,6 @@
 package com.blog.blog.service;
-
 import com.blog.blog.Model.NotificationEmail;
 import com.blog.blog.exceptions.SpringRedditException;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;

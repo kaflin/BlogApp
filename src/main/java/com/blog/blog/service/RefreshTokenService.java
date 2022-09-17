@@ -1,15 +1,10 @@
 package com.blog.blog.service;
-
 import com.blog.blog.Model.RefreshToken;
 import com.blog.blog.exceptions.SpringRedditException;
 import com.blog.blog.repository.RefreshTokenRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-
 import javax.transaction.Transactional;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service

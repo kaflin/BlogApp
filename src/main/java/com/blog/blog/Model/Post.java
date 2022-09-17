@@ -1,18 +1,12 @@
 package com.blog.blog.Model;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 import java.time.Instant;
-import java.time.LocalDateTime;
-
 import static javax.persistence.FetchType.LAZY;
 
 @Data
