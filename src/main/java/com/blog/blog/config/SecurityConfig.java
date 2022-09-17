@@ -51,7 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/signup","/api/auth/accountVerification/**","/api/auth/login").permitAll()
-                .antMatchers("/api/subreddit/save").hasAuthority("USER")
+                .antMatchers("/api/subreddit/**").hasAuthority("ADMIN")
+                .antMatchers("/api/posts/**").hasAuthority("ADMIN")
+                .antMatchers("/api/comments/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/api/votes/**").hasAnyAuthority("ADMIN","USER")
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
