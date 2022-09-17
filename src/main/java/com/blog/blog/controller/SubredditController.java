@@ -1,16 +1,13 @@
 package com.blog.blog.controller;
-import com.blog.blog.Model.Comment;
 import com.blog.blog.Model.ResponseModel;
 import com.blog.blog.Model.Subreddit;
 import com.blog.blog.dto.SubredditDto;
-import com.blog.blog.mapper.SubredditMapper;
 import com.blog.blog.repository.SubredditRepository;
 import com.blog.blog.service.SubredditService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
