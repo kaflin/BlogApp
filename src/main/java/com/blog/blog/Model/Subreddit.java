@@ -13,6 +13,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +38,10 @@ public class Subreddit {
 
     @OneToMany(fetch=FetchType.LAZY)
     private List<Post> posts;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
 
     private Instant createdDate;
 

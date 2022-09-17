@@ -3,6 +3,7 @@ package com.blog.blog.mapper;
 import com.blog.blog.Model.Comment;
 import com.blog.blog.Model.Post;
 import com.blog.blog.Model.Subreddit;
+import com.blog.blog.Model.User;
 import com.blog.blog.dto.CommentsDto;
 import com.blog.blog.dto.SubredditDto;
 import org.mapstruct.InheritInverseConfiguration;
@@ -28,8 +29,9 @@ public interface SubredditMapper {
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
     @Mapping(target="name",source="subredditDto.name")
     @Mapping(target="description",source="subredditDto.description")
+    @Mapping(target = "user", source = "user")
     @Mapping(target="posts",ignore=true)
-    Subreddit mapDtoToSubreddit(SubredditDto subredditDto);
+    Subreddit mapDtoToSubreddit(SubredditDto subredditDto, User user);
 
 
 }

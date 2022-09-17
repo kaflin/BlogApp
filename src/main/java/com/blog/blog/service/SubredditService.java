@@ -28,16 +28,19 @@ public class SubredditService {
 
     private final SubredditRepository subredditRepository;
     private final SubredditMapper subredditMapper;
+    private final AuthService authService;
 
-    public SubredditService(SubredditRepository subredditRepository, SubredditMapper subredditMapper) {
+    public SubredditService(SubredditRepository subredditRepository, SubredditMapper subredditMapper,AuthService authService) {
         this.subredditRepository = subredditRepository;
         this.subredditMapper = subredditMapper;
+        this.authService = authService;
     }
 
 
     @Transactional
     public SubredditDto save(SubredditDto subredditDto){
-            Subreddit subreddit = subredditRepository.save(subredditMapper.mapDtoToSubreddit(subredditDto));
+        User currentUser = authService.getCurrentUser();
+        Subreddit subreddit = subredditRepository.save(subredditMapper.mapDtoToSubreddit(subredditDto,currentUser));
             subredditDto.setId(subreddit.getId());
             return subredditDto;
     }
@@ -47,6 +50,8 @@ public class SubredditService {
         subreddit.setId(id);
         subreddit.setCreatedDate(Instant.now());
         subreddit.setDescription(subredditDto.getDescription());
+        User currentUser = authService.getCurrentUser();//To set userId
+        subreddit.setUser(currentUser);
         subreddit.setName(subredditDto.getName());
         subredditRepository.save(subreddit);
     }
