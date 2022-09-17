@@ -13,22 +13,17 @@ import com.blog.blog.repository.RoleRepository;
 import com.blog.blog.repository.UserRepository;
 import com.blog.blog.repository.VerificationTokenRepository;
 import com.blog.blog.security.JwtProvider;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
