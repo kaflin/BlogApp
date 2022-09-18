@@ -1,9 +1,11 @@
 package com.blog.blog.Model;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class NotificationEmail {
     private String subject;
     private String recipient;
@@ -32,8 +34,6 @@ public class NotificationEmail {
     public void setBody(String body) {
         this.body = body;
     }
-
-    public NotificationEmail(String please_activate_your_account, String email, String s) {
-    }
 }
+
 

@@ -102,7 +102,7 @@ public class AuthService {
         mailService.sendMail(new NotificationEmail("Please Activate your Account",
                 user.getEmail(), "Thank you for Signing up to Blog,"+
                 "please click on the below url to activate your account:"+
-                appConfig.getUrl()+"/api/auth/accountVerification/"+token));
+                appConfig.getUrl()+"api/auth/accountVerification/"+token));
 
     }
 
