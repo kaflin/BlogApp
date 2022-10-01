@@ -31,7 +31,7 @@ public class User {
     @Size(min = 5, max = 254)
     @Column(length = 254, unique = true)
     private String email;
-    private Instant created;
+    private Instant createdDate;
     private boolean enabled;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLE",

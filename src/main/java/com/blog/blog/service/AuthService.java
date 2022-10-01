@@ -72,7 +72,7 @@ public class AuthService {
         adminUser.setPassword(passwordEncoder.encode("admin@pass"));
         adminUser.setEmail("srjrocks60@gmail.com");
         adminUser.setEnabled(true);
-        adminUser.setCreated(Instant.now());
+        adminUser.setCreatedDate(Instant.now());
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(adminRole);
         adminUser.setRole(adminRoles);
@@ -93,6 +93,7 @@ public class AuthService {
         if(registerRequest.getEmail() !=null) {
             user.setEmail(registerRequest.getEmail());
         }
+        user.setCreatedDate(Instant.now());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setEnabled(false);
 
